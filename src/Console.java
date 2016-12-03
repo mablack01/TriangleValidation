@@ -25,7 +25,7 @@ public class Console {
         String line = null;
         int count = 0;
         try {
-            FileReader fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(new File(fileLocation));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while((line = bufferedReader.readLine()) != null)
                 if (isTriangle(line))
@@ -45,6 +45,14 @@ public class Console {
 	}
 	
 	public static boolean isTriangle(String line) {
+		String[] strs = line.replace("   ", " ").replace("  ", " ").replace("  ", " ").split(" ");
+		int[] sides = new int[3];
+		for (int i = 0; i < sides.length; i++)
+			sides[i] = Integer.parseInt(strs[i + 1]);
+		if (sides[0] + sides[1] > sides[2] &&
+				sides[1] + sides[2] > sides[0] && 
+				sides[2] + sides[0] > sides[1])
+			return true;
 		return false;
 	}
 
